@@ -1,0 +1,12 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Tfl Road Status</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="enter_road_name_hint" tools:ignore="ExtraTranslation">Enter road name</string>
+    <string name="road_status_search" tools:ignore="ExtraTranslation">Search</string>
+    <string name="road_status_retrieve_error" tools:ignore="ExtraTranslation">Error retrieving road status</string>
+    <string name="road_not_found_error" tools:ignore="ExtraTranslation">We cannot find the road name you have specified</string>
+    <string name="road_status_label" tools:ignore="ExtraTranslation">Road Status</string>
+    <string name="road_status_description_label" tools:ignore="ExtraTranslation">Road Status Description</string>
+
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragment_road_status">
+
+    <fragment
+        android:id="@+id/fragment_road_status"
+        android:name="com.gtsl.tflroadstatus.presentation.roadstatus.RoadStatusFragment"
+        android:label="Road Status"
+        tools:layout="@layout/fragment_road_status">
+    </fragment>
+</navigation>

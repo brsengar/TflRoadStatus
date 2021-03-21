@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.gtsl.tflroadstatus.presentation.roadstatus.RoadStatusViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/pale_grey">
+
+        <ProgressBar
+            android:id="@+id/road_info_progress_spinner"
+            style="?android:attr/progressBarStyleInverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/road_info_search_cardview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp">
+
+                <EditText
+                    android:id="@+id/road_name_edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="6dp"
+                    android:paddingStart="8dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/road_status_edittext_background"
+                    android:hint="@string/enter_road_name_hint"
+                    android:inputType="textCapWords"
+                    android:text="@={viewModel.roadName}"
+                    app:layout_constraintEnd_toStartOf="@+id/road_name_search_button"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/road_name_search_button"
+                    style="@style/TextAppearance.AppCompat.Widget.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="@{!viewModel.isLoading}"
+                    android:onClick="@{() -> viewModel.onRoadSearch()}"
+                    android:text="@string/road_status_search"
+                    android:textColor="@color/white"
+                    app:hideSoftKeyboard="@{viewModel.shouldHideKeyboard}"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/road_name_edit_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/road_name_edit_text" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            style="@style/TextContent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="@{viewModel.roadStatusErrorLiveData}"
+            android:visibility="@{viewModel.roadStatusErrorLiveData != null? View.VISIBLE: View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/road_info_search_cardview" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/road_status_list_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:visibility="@{viewModel.roadStatusErrorLiveData != null? View.GONE: View.VISIBLE}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/road_info_search_cardview"
+            tools:listitem="@layout/item_road_status" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
